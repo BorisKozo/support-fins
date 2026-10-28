@@ -275,6 +275,8 @@ same `stepObjects()` the app's worker output goes through):
 - the imported part runs through `analyze` + `buildFins` and gets a fin.
 Fixtures (`tests/fixtures/*.step`) are made with FreeCAD.
 
+**`rest.test.js`** -- `web/ui/rest.js`, the "run once the cursor rests" helper behind the Sway brace
+ghost: a burst of moves runs once with the last target after the pause; cancel (click, leaving the part) drops it.
 **`triindex.test.js`** -- Sway's lowestHit through the XY triangle grid (`web/triindex.js`,
 `web/swayhit.js`) against the full scan, `Object.is`-equal on 400 random rib boxes per scene
 over 8 scenes (hits and misses), with and without the rib's z bounds (the per-candidate box test).
