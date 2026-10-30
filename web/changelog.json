@@ -103,13 +103,18 @@
           ]
         }
       ]
+    },
+    {
+      "version": "1.0.1",
+      "date": "2026-10-30",
+      "entries": [
+        {
+          "date": "2026-10-29",
+          "check": "held",
+          "text": "Support gently bent small tubes using their actual curved underside."
+        }
+      ]
     }
   ],
-  "unreleased": [
-    {
-      "date": "2026-10-29",
-      "check": "held",
-      "text": "Support gently bent small tubes using their actual curved underside."
-    }
-  ]
+  "unreleased": []
 }
