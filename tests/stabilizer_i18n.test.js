@@ -13,6 +13,9 @@ const KEYS = {
     'the part’s base spreads out under this side, so there is no room on the plate for the stabilizer’s foot',
     'too little of this side lines up with the stabilizer for its tines to grip — try a flatter part of the side',
     'it would run into another brace or stabilizer — click a spot clear of it',
+    'that side is too short there for a stabilizer',
+    'Brace grip from is above this stabilizer’s top — lower it, or click higher up the side',
+    'that side is too small or curved to stand a stabilizer against',
   ],
   'web/index.html': [
     'Stabilizer',
@@ -29,6 +32,8 @@ const KEYS = {
     'Click an upright side of the part near its base, where the top of the fin should be, to stand a stabilizer that keeps it from tipping over',
     '{n} stabilizer',
     '{n} stabilizers',
+    '{n} stabilizer stands up to {mm}mm before gripping the part — the side isn’t there lower down. Check its first layers in the slicer.',
+    '{n} stabilizers stand up to {mm}mm before gripping the part — the side isn’t there lower down. Check their first layers in the slicer.',
   ],
 };
 

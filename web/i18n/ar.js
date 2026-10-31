@@ -525,4 +525,9 @@ export default {
   "{n} stabilizer": {"one": "{n} مثبّت", "other": "{n} مثبّتات"},
   "{n} stabilizers": {"one": "{n} مثبّت", "other": "{n} مثبّتات"},
   "Hover an upright side of the part, near its base, to preview a stabilizer: a fin standing on the plate that keeps the part from tipping over. Its top follows the cursor; Brace depth sets how far it reaches out (100% = as far as it is tall), Brace grip from and Brace tine spacing its tines. Click to stand it.": "مرّر المؤشر فوق جانب قائم من القطعة قرب قاعدتها لمعاينة مثبّت: زعنفة قائمة على سطح الطباعة تمنع القطعة من الانقلاب. تتبع قمتها المؤشر؛ يحدد عمق الدعامة مدى امتدادها للخارج (100% = بقدر ارتفاعها)، ويحدد «بدء أسنان الدعامة من ارتفاع» و«تباعد أسنان التثبيت» أسنانها. انقر لوضعه.",
+  "that side is too short there for a stabilizer": "هذا الجانب قصير جدًا هناك لمثبّت",
+  "Brace grip from is above this stabilizer’s top — lower it, or click higher up the side": "«بدء أسنان الدعامة من ارتفاع» أعلى من قمة هذا المثبّت — اخفضه، أو انقر أعلى على الجانب",
+  "that side is too small or curved to stand a stabilizer against": "هذا الجانب صغير جدًا أو منحنٍ فلا يمكن إسناد مثبّت إليه",
+  "{n} stabilizer stands up to {mm}mm before gripping the part — the side isn’t there lower down. Check its first layers in the slicer.": {"one": "يقف {n} مثبّت حتى {mm} مم قبل أن يمسك القطعة — الجانب غير موجود أسفل ذلك. تحقّق من طبقاته الأولى في برنامج التقطيع.", "other": "تقف {n} مثبّتات حتى {mm} مم قبل أن تمسك القطعة — الجانب غير موجود أسفل ذلك. تحقّق من طبقاتها الأولى في برنامج التقطيع."},
+  "{n} stabilizers stand up to {mm}mm before gripping the part — the side isn’t there lower down. Check their first layers in the slicer.": {"one": "يقف {n} مثبّت حتى {mm} مم قبل أن يمسك القطعة — الجانب غير موجود أسفل ذلك. تحقّق من طبقاته الأولى في برنامج التقطيع.", "other": "تقف {n} مثبّتات حتى {mm} مم قبل أن تمسك القطعة — الجانب غير موجود أسفل ذلك. تحقّق من طبقاتها الأولى في برنامج التقطيع."},
 };

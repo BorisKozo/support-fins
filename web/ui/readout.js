@@ -266,6 +266,17 @@ function updateDrawReadout(built, ms) {
                  + 'lone wall. Fine if it prints; rotate so that side reaches the plate if it wobbles.',
                  stilted.length, { mm: Math.round(tallest) }));
   }
+  // ...and a stabilizer, much shorter, whose side isn't there at its base (an undercut):
+  // it stands on the plate holding nothing up to its first tine
+  const stabStilted = ok.filter((w) => w.kind === 'stabilizer' && (w.info?.stilt ?? 0) > 5);
+  if (stabStilted.length) {
+    const tallest = Math.max(...stabStilted.map((w) => w.info.stilt));
+    help.push(tn('{n} stabilizer stands up to {mm}mm before gripping the part — the side isn’t there lower down. '
+                 + 'Check its first layers in the slicer.',
+                 '{n} stabilizers stand up to {mm}mm before gripping the part — the side isn’t there lower down. '
+                 + 'Check their first layers in the slicer.',
+                 stabStilted.length, { mm: Math.round(tallest) }));
+  }
   if (bad) {
     const one = drawnWalls.find((w) => !w.ok);
     const reason = one?.info?.reason ? ` (${t(one.info.why ?? one.info.reason, one.info.params)})` : '';

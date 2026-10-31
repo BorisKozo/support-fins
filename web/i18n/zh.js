@@ -634,4 +634,9 @@ export default {
   "{n} stabilizer": {"other": "{n} 个稳定撑"},
   "{n} stabilizers": {"other": "{n} 个稳定撑"},
   "Hover an upright side of the part, near its base, to preview a stabilizer: a fin standing on the plate that keeps the part from tipping over. Its top follows the cursor; Brace depth sets how far it reaches out (100% = as far as it is tall), Brace grip from and Brace tine spacing its tines. Click to stand it.": "将光标悬停在零件靠近底部的直立侧面上即可预览稳定撑：一个立在热床上、防止零件倾倒的鳍片。其顶端跟随光标；撑体进深决定其伸出多远（100% = 伸出距离等于高度），撑体咬合起始和撑体齿间距决定其齿。点击即可放置。",
+  "that side is too short there for a stabilizer": "该侧面在此处太短，放不下稳定撑",
+  "Brace grip from is above this stabilizer’s top — lower it, or click higher up the side": "撑体咬合起始高于该稳定撑的顶端——请调低它，或在侧面上点击更高的位置",
+  "that side is too small or curved to stand a stabilizer against": "该侧面太小或弯曲过大，无法靠放稳定撑",
+  "{n} stabilizer stands up to {mm}mm before gripping the part — the side isn’t there lower down. Check its first layers in the slicer.": {"other": "{n} 个稳定撑在抓住零件前最多空立 {mm}mm——更低处没有侧面。请在切片软件中检查其最初几层。"},
+  "{n} stabilizers stand up to {mm}mm before gripping the part — the side isn’t there lower down. Check their first layers in the slicer.": {"other": "{n} 个稳定撑在抓住零件前最多空立 {mm}mm——更低处没有侧面。请在切片软件中检查其最初几层。"},
 };

@@ -752,6 +752,7 @@ el('draw-clear').addEventListener('click', () => {
   drawMsg = '';
   clearPreview();
   rebuildDrawn();
+  syncDrawControls();   // the last stabilizer gone hides the brace fields again
   updateReadout(lastBuilt);
   updateFit();
 });

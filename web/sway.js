@@ -234,7 +234,8 @@ export function buildSwayRib(p, uc, partTris, topo, rot, offset, opts = {}) {
   const minH = stab ? SWAY.stab.minH : SWAY.minRibH;
   let H = fz1 - SWAY.topClear;
   if (H < minH) {
-    return { ok: false, reason: `that face only reaches ${fz1.toFixed(0)}mm up — too short to need a brace` };
+    return { ok: false, reason: stab ? 'that side is too short there for a stabilizer'
+      : `that face only reaches ${fz1.toFixed(0)}mm up — too short to need a brace` };
   }
   if (Number.isFinite(opts.maxHeight)) {
     H = Math.min(H, opts.maxHeight);
@@ -330,7 +331,7 @@ export function buildSwayRib(p, uc, partTris, topo, rot, offset, opts = {}) {
     }
     if (hit === Infinity) break;
     H = hit - 1.0;
-    if (H < SWAY.minRibH) break;
+    if (H < minH) break;
   }
   if (hit !== Infinity) {
     return { ok: false, reason: stab ? 'the part sticks out over that spot, so a stabilizer standing on the plate can’t reach up the side'
@@ -369,9 +370,18 @@ export function buildSwayRib(p, uc, partTris, topo, rot, offset, opts = {}) {
   // Tines: evenly spaced up the face, each snapped into exactly one layer cell.
   let tines = 0, firstGrip = Infinity, stilt = 0;
   if (S.tines) {
-    const spacing = S.spacing;
     const zStart = Math.max(fz0 + 0.5, S.gripFrom, SWAY.footH + 0.5);
     const zEnd = Math.min(fz1, H) - 0.5;
+    // "Brace grip from" at or over a stabilizer's top leaves it nothing to grip with:
+    // say so, rather than blame the side (a brace setting raised for tall braces)
+    if (stab && S.gripFrom > 0 && zStart >= zEnd) {
+      return { ok: false, reason: 'Brace grip from is above this stabilizer’s top — lower it, or click higher up the side' };
+    }
+    // A short stabilizer squeezes its spacing so its minimum tines fit: at the 6mm
+    // default an 8mm one would otherwise get one tine and be refused.
+    const spacing = stab && zEnd > zStart
+      ? Math.max(2 * S.layerH, Math.min(S.spacing, (zEnd - zStart) / (SWAY.stab.minTines - 1)))
+      : S.spacing;
     for (let z = zStart; z <= zEnd + 1e-6; z += spacing) {
       const bot = Math.round(z / S.layerH) * S.layerH;
       const top = bot + S.layerH;
@@ -797,7 +807,10 @@ export function swayAtFace(topo, result, rot, faceIndex, point, opts = {}, avoid
   opts = { allowStilt: true, ...opts, maxHeight: opts.full ? cap : Math.min(point[2], cap) };
   const { byFace, partTris } = patchesFor(topo, rot, result.offset);
   const p = byFace.get(faceIndex);
-  if (!p) return { ok: false, reason: 'that face is too small or curved to stand a brace against' };
+  if (!p) {
+    return { ok: false, reason: opts.stabilizer ? 'that side is too small or curved to stand a stabilizer against'
+      : 'that face is too small or curved to stand a brace against' };
+  }
   const u = point[0] * p.u.x + point[1] * p.u.y;
   const { braces, walls } = avoidance(avoid);
   let last = null, hitBrace = false, hitWall = false;

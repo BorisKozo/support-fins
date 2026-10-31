@@ -8,3 +8,6 @@
 
 # vendored unmodified, byte for byte as upstream ships it
 web/vendor/** -text
+
+# a PDF is binary however its bytes look: text=auto would rewrite its CR LF pairs
+*.pdf binary

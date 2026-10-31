@@ -408,14 +408,14 @@ side near its base (its top follows the cursor), click to stand it.
 |---|---|---|
 | rib | `buildSwayRib` with `opts.stabilizer`: edge-on to the side, inner edge at the gap following the face (and its lean) band by band | a sway brace's stiff direction and contour following; a 10° side gives a 10° inner edge |
 | height | where the cursor is on the side, at least **5 mm** (`stab.minH`) | the user picks how much of the base to hold |
-| depth at the bed | a sway brace's: "Brace depth" × height (5–**200 %**), at least 8 mm, at most 60 mm unless "Full brace depth" | one set of settings for both; **100 %** stands it out as far as it is tall (45°) |
+| depth at the bed | "Brace depth" × height (5–**200 %**), at least **3 mm** (`stab.minDepth`, a brace's 8 mm would swallow every step under ~40 %), at most 60 mm unless "Full brace depth" | one set of settings for both; **100 %** stands it out as far as it is tall (45°) |
 | top | **2 mm** flat (`stab.topDepth`) | a point is a retraction, as for a brace |
 | base | the side must reach within **2 mm** of the plate where it stands (`stab.baseMax`) | it buttresses the base; a side that starts higher is a gusset's or a brace's |
 | foot, gap, thickness | a sway brace's (`footH`, `footHalf`, `footPad`, `thMin`–`thMax`, the material gap) | unchanged from the printed brace |
-| tines | a sway brace's: from "Brace grip from" up, "Brace tine spacing" apart; at least **2** (`stab.minTines`) | a short one may only have room for two |
+| tines | a sway brace's: from "Brace grip from" up, "Brace tine spacing" apart, squeezed closer when that fits fewer than **2** (`stab.minTines`); refused, naming the setting, when "Brace grip from" is above its top | at the 6 mm default an 8 mm one would get one tine; grip from is a brace setting raised for tall braces |
 | cross ribs | none | it is already wide at the plate |
 | other supports | kept off Auto's braces and walls and every hand-placed brace or stabilizer, as a sway brace is | two supports that touch fuse into one piece |
-| refused | a face leaning past a brace's limit; a side that doesn't come down to the plate; a click under 5 mm; the part over it; no plate for its foot; too few tines grip | says why, before the click, in the ghost |
+| refused | a face leaning past a brace's limit; a side that doesn't come down to the plate; a click under 5 mm; the part over it lower than 5 mm (higher, it is shortened under the feature, as a brace is); no plate for its foot; too few tines grip | says why, before the click, in the ghost |
 
 ## Joined walls and ties (Full coverage) — `web/fins/fill.js`, `web/prop/ties.js`
 

@@ -170,3 +170,47 @@ Deno.test('stabilizer: a second one on top of the first is refused, not fused in
   const onTop = sway.swayAtFace(l.topo, l.res, ID, l.side, [l.sideX(20), l.y, 20], opts(), [first]);
   assert(!onTop.ok && /another brace or stabilizer/.test(onTop.reason), `on top: ${onTop.ok ? 'built' : onTop.reason}`);
 });
+
+Deno.test('stabilizer: a short one gets its tines at the default 6mm spacing, down to 5mm tall', () => {
+  // the 6mm default fits one tine under ~8mm, so the spacing squeezes to fit two
+  const l = L();
+  for (const z of [5, 6, 7, 8, 10]) {
+    const { r, tines } = parts(l, z, opts(1, { tineSpacing: 6 }));
+    assert(r.ok, `${z}mm at 6mm spacing: ${r.reason}`);
+    assert(r.tines >= sway.SWAY.stab.minTines && tineBoxes(tines).length === r.tines, `${z}mm: ${r.tines} tines`);
+  }
+  // ...and a tall one keeps the spacing it was given
+  const tall = parts(l, 30, opts(1, { tineSpacing: 6 })), zs = tineBoxes(tall.tines).map((b) => b.lo[2]).sort((a, b) => a - b);
+  assert(tall.r.ok && zs.length >= 4 && zs[1] - zs[0] > 5.5, `30mm at 6mm spacing: ${zs.map((z) => z.toFixed(1))}`);
+});
+
+Deno.test('stabilizer: Brace grip from at or over its top refuses it by name; under its top, starts the tines there', () => {
+  const l = L();
+  for (const grip of [20, 30, 50]) {
+    const r = sway.swayAtFace(l.topo, l.res, ID, l.side, [l.sideX(20), l.y, 20], opts(1, { gripFrom: grip }));
+    assert(!r.ok && /Brace grip from is above/.test(r.reason), `grip from ${grip} on a 20mm one: ${r.ok ? 'built' : r.reason}`);
+  }
+  const { r, tines } = parts(l, 8, opts(1, { gripFrom: 5 }));
+  assert(r.ok && r.tines >= 2, `grip from 5 on an 8mm one: ${r.ok ? `${r.tines} tines` : r.reason}`);
+  assert(Math.min(...tineBoxes(tines).map((b) => b.lo[2])) >= 5 - LAYER, 'a tine below Brace grip from');
+});
+
+Deno.test('stabilizer: a ledge over it shortens it under the ledge, as a brace is, rather than refusing', () => {
+  // a 10mm column with a 5mm ledge out of its -x side at 12..14mm
+  const a = block(0, 10, 0, 10, 0, 40), b = block(-5, 0, 0, 10, 12, 14);
+  const pos = new Float32Array(a.length + b.length);
+  pos.set(a);
+  pos.set(b, a.length);
+  const topo = topoOf(pos), res = analyze(topo, 45, ID);
+  let side = -1;   // the column's own -x side (x = 0), not the ledge's end
+  for (let f = 0; f < topo.nFaces && side < 0; f++) {
+    if (topo.nrm[f * 3] < -0.9 && Math.abs(topo.pos[f * 9]) < 1e-6 && topo.pos[f * 9 + 2] < 12) side = f;
+  }
+  assert(side >= 0, 'test setup: no column side below the ledge');
+  const x = res.offset.x, y = 5 + res.offset.y;
+  const r = sway.swayAtFace(topo, res, ID, side, [x, y, 10], opts(0.5));
+  assert(r.ok && Math.abs(r.height - 10) < 1e-6, `under the ledge: ${r.ok ? r.height : r.reason}`);
+  // clicked over the ledge: the rib would run through it, so it comes down below it
+  const over = sway.swayAtFace(topo, res, ID, side, [x, y, 11.5], opts(2));
+  assert(over.ok && over.height < 12 && over.height >= sway.SWAY.stab.minH, `over the ledge: ${over.ok ? over.height : over.reason}`);
+});
