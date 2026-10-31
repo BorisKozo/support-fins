@@ -564,7 +564,7 @@ CAD work (a tolerance-absorbing feature for mating holes). Don't collide the ter
 The browser's **Full brace depth** defaults off. Without `uncappedDepth: true`,
 the bed depth stays `max(minDepth, min(maxDepth, reach * H))`, where `maxDepth`
 remains 60 mm. Opt-in uses `max(minDepth, reach * H)` instead; `reach` retains
-its 5–50% bounds and `H` is the actual collision-limited brace height. The depth
+its 5–200% bounds and `H` is the actual collision-limited brace height. The depth
 is recomputed whenever a model collision lowers the rib. Top depth, thickness,
 foot padding, tine geometry and minimum grip are unchanged.
 
