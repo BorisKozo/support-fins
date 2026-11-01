@@ -16,6 +16,7 @@ const KEYS = {
     'that side is too short there for a stabilizer',
     'Brace grip from is above this stabilizer’s top — lower it, or click higher up the side',
     'that side is too small or curved to stand a stabilizer against',
+    'that side curves over past 45° near the plate there, so a stabilizer can’t follow it up — try a steeper part of the side',
   ],
   'web/index.html': [
     'Stabilizer',

@@ -639,4 +639,6 @@ export default {
   "that side is too small or curved to stand a stabilizer against": "该侧面太小或弯曲过大，无法靠放稳定撑",
   "{n} stabilizer stands up to {mm}mm before gripping the part — the side isn’t there lower down. Check its first layers in the slicer.": {"other": "{n} 个稳定撑在抓住零件前最多空立 {mm}mm——更低处没有侧面。请在切片软件中检查其最初几层。"},
   "{n} stabilizers stand up to {mm}mm before gripping the part — the side isn’t there lower down. Check their first layers in the slicer.": {"other": "{n} 个稳定撑在抓住零件前最多空立 {mm}mm——更低处没有侧面。请在切片软件中检查其最初几层。"},
+  "the face curves over past 45° near the plate there, so a brace can’t follow it up — try a steeper part of the side": "那里的面在靠近热床处就弯过了 45°，防晃撑没法顺着它往上 —— 请选侧面更陡的部分",
+  "that side curves over past 45° near the plate there, so a stabilizer can’t follow it up — try a steeper part of the side": "该侧面在靠近热床处就弯过了 45°，稳定撑没法顺着它往上 —— 请选侧面更陡的部分",
 };
